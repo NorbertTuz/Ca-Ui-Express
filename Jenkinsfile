@@ -37,11 +37,13 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SonarQube Server') { // 'SonarQube Server' to nazwa serwera skonfigurowanego w Jenkins
-                    sh "${SCANNER_HOME}/bin/sonar-scanner \
+                    sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=Ca-Ui-Express-app \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONARQUBE_URL} \
-                        -Dsonar.login=${SONARQUBE_TOKEN}"
+                        -Dsonar.login=${SONARQUBE_TOKEN}
+                    """
                 }
             }
         }
