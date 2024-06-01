@@ -1,49 +1,26 @@
 pipeline {
     agent any
-
-    environment {
-        SCANNER_HOME = tool 'SonarQube Scanner' // Nazwa narzędzia SonarQube Scanner zdefiniowana w Jenkins
+    tools {
+        nodejs 'node-18.17.1'
     }
-
     stages {
 
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                checkout scm
+                sh "npm install"
             }
         }
 
-        stage('SonarQube Analysis') {
-            environment {
-                SONARQUBE_URL = 'http://13.53.151.187:9000'
-                SONARQUBE_TOKEN = 'sqa_0e7f16b83fdf26e775fbba609ce3705fdb374dbd'
-            }
+        stage('Unit Test') {
             steps {
-                withSonarQubeEnv('SonarQube-Server') { 
-                    sh "${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=Ca-Ui-Express-app \
-                        -Dsonar.sources=."
-                }
+                sh "npm test:unit"
             }
         }
 
-        stage('Quality Gate') {
+        stage('Integration Test') {
             steps {
-                script {
-                    timeout(time: 1, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
-                }
+                sh "npm test:integration"
             }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()
         }
     }
 }
