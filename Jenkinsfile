@@ -19,7 +19,7 @@ pipeline {
                 SONARQUBE_TOKEN = 'sqa_ae190a086433bce768f00d34f826fbaed78b73b8'
             }
             steps {
-                withSonarQubeEnv('SonarQube Server') { 
+                withSonarQubeEnv('SonarQube-Server') { 
                     sh "${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=sonar.projectKey=Ca-Ui-Express-app \
                         -Dsonar.sources=."
