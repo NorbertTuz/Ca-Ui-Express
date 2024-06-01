@@ -16,12 +16,12 @@ pipeline {
         stage('SonarQube Analysis') {
             environment {
                 SONARQUBE_URL = 'http://13.53.151.187:9000'
-                SONARQUBE_TOKEN = 'sqa_ae190a086433bce768f00d34f826fbaed78b73b8'
+                SONARQUBE_TOKEN = 'sqa_0e7f16b83fdf26e775fbba609ce3705fdb374dbd'
             }
             steps {
                 withSonarQubeEnv('SonarQube-Server') { 
                     sh "${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=sonar.projectKey=Ca-Ui-Express-app \
+                        -Dsonar.sonar.projectKey=Ca-Ui-Express-app \
                         -Dsonar.sources=."
                 }
             }
