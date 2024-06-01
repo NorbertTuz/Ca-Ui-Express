@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -8,6 +9,8 @@ pipeline {
     environment {
         SCANNER_HOME = tool 'SonarQube Scanner' // Nazwa narzędzia SonarQube Scanner zdefiniowana w Jenkins
         NODE_ENV = 'production'
+        SONARQUBE_URL = 'http://13.53.151.187:9000'
+        SONARQUBE_TOKEN = 'sqa_ae190a086433bce768f00d34f826fbaed78b73b8'
     }
 
     stages {
@@ -31,14 +34,10 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            environment {
-                SONARQUBE_URL = 'http://13.53.151.187:9000'
-                SONARQUBE_TOKEN = 'sqa_ae190a086433bce768f00d34f826fbaed78b73b8'
-            }
             steps {
                 withSonarQubeEnv('SonarQube Server') { // 'SonarQube Server' to nazwa serwera skonfigurowanego w Jenkins
                     sh """
-                        ${SCANNER_HOME}/bin/sonar-scanner \
+                        ${SCANNER_HOME}/bin/sonar-scanner -X \
                         -Dsonar.projectKey=Ca-Ui-Express-app \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONARQUBE_URL} \
