@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git 'https://github.com/foo/bar.git'
+                git 'https://github.com/NorbertTuz/Ca-Ui-Express.git'
             }
         }
 
@@ -38,9 +38,13 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner \
+                    sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=Ca-Ui-Express-app \
-                        -Dsonar.sources=."
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONARQUBE_URL} \
+                        -Dsonar.login=${SONARQUBE_TOKEN}
+                    """
                 }
             }
         }
@@ -71,3 +75,4 @@ pipeline {
         }
     }
 }
+
