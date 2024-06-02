@@ -40,7 +40,7 @@ pipeline {
                 withSonarQubeEnv('SonarQube-Server') {
                     sh """
                         ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=Ca-Ui-Express-app \
+                        -Dsonar.sonar.projectKey=Ca-Ui-Express-app \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONARQUBE_URL} \
                         -Dsonar.login=${SONARQUBE_TOKEN}
