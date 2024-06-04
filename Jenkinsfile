@@ -20,7 +20,7 @@ pipeline {
 
         stage('Integration Test') {
             steps {
-                sh "npm test:integration"
+                sh "npm run test:integration"
             }
         }
     }
