@@ -17,8 +17,10 @@ pipeline {
                  sh "npm run test:unit"
             }
         }
-
-        
+        stage('Integration Test') {
+            steps {
+                sh "npm run test:integration"
+            }
         }
     }
 }
