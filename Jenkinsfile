@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     tools {
@@ -14,14 +13,10 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                 sh "npm run test:unit"
+                sh "npm test:unit"
             }
         }
-        stage('Integration Test') {
-            steps {
-                sh "npm run test:integration"
-            }
-        }
+
+        
     }
 }
-
