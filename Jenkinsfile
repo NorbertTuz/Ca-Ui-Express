@@ -1,10 +1,9 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node-18.17.1'
+        nodejs '18.17.0'
     }
     stages {
-
         stage('Build') {
             steps {
                 sh "npm install"
@@ -13,13 +12,13 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                sh "npm test:unit"
+                sh "npm run test:unit"
             }
         }
 
         stage('Integration Test') {
             steps {
-                sh "npm test:integration"
+                sh "npm run test:integration"
             }
         }
     }
