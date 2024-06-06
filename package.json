@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test:unit": "mocha ./test/unit/*.spec.js"
+    "test:unit": "mocha ./test/unit/*.spec.js",
+    "test:integration": "mocha ./test/integration/*.spec.js"
   
 
    
