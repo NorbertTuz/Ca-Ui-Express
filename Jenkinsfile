@@ -6,7 +6,7 @@ pipeline {
     }
      environment {
         // Replace with your Docker image name
-        DOCKER_IMAGE = 'your-docker-image-name:latest'
+        DOCKER_IMAGE = 'CA-UI:latest'
         
         // Replace with your Docker registry URL
         // Example for Docker Hub: 'https://index.docker.io/v1/'
