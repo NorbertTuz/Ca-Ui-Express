@@ -3,7 +3,7 @@ pipeline {
     tools {
         nodejs '18.17.0'
     }
-     environment {
+    environment {
         // Docker image name
         DOCKER_IMAGE = 'Patriciaog/CaPipelineApp:latest'
         
@@ -22,7 +22,6 @@ pipeline {
             }
         }
 
-    stages {
         stage('Build') {
             steps {
                 sh "npm install"
@@ -40,7 +39,8 @@ pipeline {
                 sh "npm run test:integration"
             }
         }
-         stage('Build Docker Image') {
+        
+        stage('Build Docker Image') {
             steps {
                 script {
                     docker.build("${DOCKER_IMAGE}")
@@ -71,6 +71,5 @@ pipeline {
         always {
             cleanWs()
         }
-    }
     }
 }
