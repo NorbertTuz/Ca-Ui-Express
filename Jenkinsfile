@@ -61,7 +61,7 @@ pipeline {
         stage('Deploy Docker Container') {
             steps {
                 script {
-                    docker.image("${DOCKER_IMAGE}").run("-d -p 80:80")
+                    docker.image("${DOCKER_IMAGE}").run("-d -p 80:3000")
                 }
             }
         }
